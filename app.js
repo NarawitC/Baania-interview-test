@@ -3,6 +3,7 @@ const express = require('express');
 const cors = require('cors');
 //---------------------------------------------- middleware ----------------------------------------------
 const errorMiddleware = require('./middlewares/error');
+const notFoundMiddleware = require('./middlewares/notFound');
 //---------------------------------------------- routes ----------------------------------------------
 const clientRoutes = require('./routes/client');
 
@@ -28,5 +29,6 @@ app.use(express.urlencoded({ extended: false }));
 app.use('', clientRoutes);
 
 app.use(errorMiddleware);
+app.use(notFoundMiddleware);
 
 app.listen(port, () => console.log(`\n\n\nRunning port ${port}`));
