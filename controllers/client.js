@@ -1,4 +1,4 @@
-const { House } = require('../models');
+const { House, sequelize } = require('../models');
 
 exports.createHouse = async (req, res, next) => {
   try {
@@ -10,8 +10,30 @@ exports.createHouse = async (req, res, next) => {
       postCode: post_code,
     });
     res.status(201).json({
-      message: 'Home created successfully',
       house,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+exports.getHouses = async (req, res, next) => {
+  try {
+    const { skip, take } = req.query;
+    const count = await House.count();
+    const offset = Number(skip);
+    const limit = Number(take) ? Number(take) : count;
+
+    const houses = await House.findAll({
+      attribute: {
+        exclude: ['createdAt', 'updatedAt', 'deletedAt'],
+      },
+      offset,
+      limit,
+    });
+    res.status(200).json({
+      payload: houses,
+      count,
     });
   } catch (error) {
     next(error);
