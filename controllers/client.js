@@ -58,7 +58,10 @@ exports.getPostCode = async (req, res, next) => {
   try {
     const count = await House.count();
     const houses = await House.findAll({
-      attributes: ['post_code'],
+      attributes: [
+        sequelize.fn('DISTINCT', sequelize.col('post_code')),
+        'post_code',
+      ],
     });
     res.status(200).json({
       payload: houses,
