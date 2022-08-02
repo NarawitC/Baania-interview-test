@@ -8,4 +8,9 @@ router.get('/home', clientController.getHouses);
 
 router.get('/postCode', clientController.getPostCode);
 
+router.get(
+  '/postCode/:id',
+  clientController.getAverageAndMedianPriceByPostCodeId
+);
+
 module.exports = router;
