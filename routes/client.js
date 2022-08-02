@@ -6,4 +6,6 @@ const clientController = require('../controllers/client');
 router.post('/home', clientController.createHouse);
 router.get('/home', clientController.getHouses);
 
+router.get('/postCode', clientController.getPostCode);
+
 module.exports = router;

@@ -1,5 +1,7 @@
 const { House, sequelize } = require('../models');
 
+//---------------------------------------------- Home ----------------------------------------------
+
 exports.createHouse = async (req, res, next) => {
   try {
     const { name, desc, price, post_code } = req.body;
@@ -30,6 +32,22 @@ exports.getHouses = async (req, res, next) => {
       },
       offset,
       limit,
+    });
+    res.status(200).json({
+      payload: houses,
+      count,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+//---------------------------------------------- postCode ----------------------------------------------
+exports.getPostCode = async (req, res, next) => {
+  try {
+    const count = await House.count();
+    const houses = await House.findAll({
+      attributes: ['post_code'],
     });
     res.status(200).json({
       payload: houses,

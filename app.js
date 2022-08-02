@@ -1,9 +1,9 @@
-//*                                                             libraries
+//---------------------------------------------- libraries ----------------------------------------------
 const express = require('express');
 const cors = require('cors');
-//*                                                             middleware
+//---------------------------------------------- middleware ----------------------------------------------
 const errorMiddleware = require('./middlewares/error');
-//*                                                             routes
+//---------------------------------------------- routes ----------------------------------------------
 const clientRoutes = require('./routes/client');
 
 require('dotenv').config();

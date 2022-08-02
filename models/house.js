@@ -17,7 +17,7 @@ module.exports = (sequelize, DataTypes) => {
           isDecimal: true,
         },
       },
-      postCode: {
+      post_code: {
         type: DataTypes.STRING(5),
         allowNull: false,
         validator: {
