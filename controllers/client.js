@@ -33,12 +33,11 @@ exports.createHouse = async (req, res, next) => {
 exports.getHouses = async (req, res, next) => {
   try {
     const { skip, take } = req.query;
-    const count = await House.count();
     const offset = Number(skip);
-    const limit = Number(take) ? Number(take) : count;
+    const limit = Number(take) ? Number(take) : undefined;
 
-    const houses = await House.findAll({
-      attribute: {
+    const { count, rows: houses } = await House.findAndCountAll({
+      attributes: {
         exclude: ['createdAt', 'updatedAt', 'deletedAt'],
       },
       offset,
