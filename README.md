@@ -1,7 +1,7 @@
 # Baania-interview-test
 
 ## About The Project
- 
+  I closely follow the git workflow guidelines. When developing a new feature, I will create a new branch for editing files and committing changes. When that branch is completed, I will merge that branch to the main branch. For my commit messages, I use semantic commit messages for clarification. I use .prettierrc.js files to format my code for team development.
 
 ## Getting Started
 
