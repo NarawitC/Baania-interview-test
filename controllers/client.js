@@ -5,6 +5,17 @@ const { House, sequelize } = require('../models');
 exports.createHouse = async (req, res, next) => {
   try {
     const { name, desc, price, post_code } = req.body;
+    if (!name || !desc || !price || !post_code) {
+      throw new Error('Missing required fields');
+    }
+    const regexPostCode = /^[0-9]{5}$/;
+    if (!regexPostCode.test(post_code)) {
+      throw new Error('Invalid post code');
+    }
+    const regexPrice = /^[0-9]{1,}[.][0-9]{2}$/;
+    if (!regexPrice.test(price)) {
+      throw new Error('Invalid price');
+    }
     const house = await House.create({
       name,
       desc,
@@ -47,7 +58,10 @@ exports.getPostCode = async (req, res, next) => {
   try {
     const count = await House.count();
     const houses = await House.findAll({
-      attributes: ['post_code'],
+      attributes: [
+        sequelize.fn('DISTINCT', sequelize.col('post_code')),
+        'post_code',
+      ],
     });
     res.status(200).json({
       payload: houses,
