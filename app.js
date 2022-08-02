@@ -3,6 +3,8 @@ const express = require('express');
 const cors = require('cors');
 //*                                                             middleware
 const errorMiddleware = require('./middleware/error');
+//*                                                             routes
+const clientRoutes = require('./routes/client');
 
 require('dotenv').config();
 const app = express();
@@ -19,9 +21,11 @@ app.use(express.urlencoded({ extended: false }));
 
 // app.use('', (req, res, next) => {
 //   console.log(req.url);
+//   console.log(req);
 //   console.log('-----------------------------------------');
 //   next();
 // });
+app.use('', clientRoutes);
 
 app.use(errorMiddleware);
 

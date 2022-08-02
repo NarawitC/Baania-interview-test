@@ -13,10 +13,16 @@ module.exports = (sequelize, DataTypes) => {
       price: {
         type: DataTypes.DECIMAL(10, 2),
         allowNull: false,
+        validator: {
+          isDecimal: true,
+        },
       },
       postCode: {
         type: DataTypes.STRING(5),
         allowNull: false,
+        validator: {
+          is: /^[0-9]{5}$/,
+        },
       },
     },
     { underscored: true, paranoid: true }
