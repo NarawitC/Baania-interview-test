@@ -1,5 +1,8 @@
+//*                                                             libraries
 const express = require('express');
 const cors = require('cors');
+//*                                                             middleware
+const errorMiddleware = require('./middleware/error');
 
 require('dotenv').config();
 const app = express();
@@ -14,10 +17,12 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-app.use('', (req, res, next) => {
-  console.log(req.url);
-  console.log('-----------------------------------------');
-  next();
-});
+// app.use('', (req, res, next) => {
+//   console.log(req.url);
+//   console.log('-----------------------------------------');
+//   next();
+// });
+
+app.use(errorMiddleware);
 
 app.listen(port, () => console.log(`\n\n\nRunning port ${port}`));
